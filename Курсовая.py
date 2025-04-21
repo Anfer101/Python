@@ -18,6 +18,7 @@ y = 400
 food = random.randint(0,1)
 game_close = False
 font_style = pygame.font.SysFont("bahnschrift", 25)
+game_over = 0
 # радиус круга
 r = 40
 
@@ -32,12 +33,17 @@ blue = (0, 0, 255)
 
 def message(msg, color):
    mesg = font_style.render(msg, True, color)
-   screen.blit(mesg, [400,400])
+   screen.blit(mesg, [100,300])
+def message1(msg,color):
+   mesg = font_style.render(msg, True, color)
+   screen.blit(mesg, [100,400])
+
 
 while game_close != True:
-    while game_close == True:
+    while game_over == 1:
            screen.fill(blue)
-           message("Вы проиграли! Нажмите Q для выхода или C для повторной игры", red)
+           message("Вы проиграли! Нажмите Q для выхода", red)
+           message1("или C для повторной игры", red)
            pygame.display.update()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -67,7 +73,7 @@ while game_close != True:
         pygame.display.update()
         pygame.time.delay(65)
     if x == 700:
-        game_close = True
+        game_over = 1
     screen.fill((neutral))
     pygame.draw.rect(screen, ne, [50,350, 90,100])
     pygame.draw.rect(screen, en, [660,350, 90,100])
