@@ -43,13 +43,15 @@ while game_close != True:
             pygame.quit()
             exit()
     message("Игра", red)
+    def run(x, speed_x, speed_y, y, HEIGHT, WIDTH, neutral, red, r, screen):
+        screen.fill((neutral))
+        pygame.draw.circle(screen, red, (x,y), r)
+        pygame.display.update()
+        pygame.time.delay(30)
+    run(x, speed_x, speed_y, y, HEIGHT, WIDTH, neutral, red, r, screen)
     x += speed_x
     y += speed_y
     if x > WIDTH - r or x < r:
         speed_x = speed_x * -1
     if y > HEIGHT - r or y < r:
         speed_y = speed_y * -1
-    screen.fill((neutral))
-    pygame.draw.circle(screen, red, (x,y), r)
-    pygame.display.update()
-    pygame.time.delay(30)
