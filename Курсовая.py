@@ -1,6 +1,7 @@
 import pygame
 import random
-
+import subprocess
+import sys
 pygame.init()
 
 # укажем размер окна
@@ -56,8 +57,9 @@ while game_close != True:
            for event in pygame.event.get():
               if event.type == pygame.KEYDOWN:
                    if event.key == pygame.K_q:
-                      pygame.quit
-                      exit()
+                         pygame.quit()
+                         subprocess.run(["python", "Menu.py"])
+                      
     clocked +=0.1
     clocked = round(clocked,1)
     for event in pygame.event.get():
