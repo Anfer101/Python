@@ -21,7 +21,9 @@ font_style = pygame.font.SysFont("bahnschrift", 25)
 game_over = 0
 x_circle = 50
 y_circle = 400
-score = 3
+score = 0
+score = round(score,1)
+clocked = 0
 # радиус круга
 r = 40
 
@@ -35,20 +37,29 @@ en = (125,125,125)
 blue = (0, 0, 255)
 
 def message(msg, color):
-   mesg = font_style.render(msg, True, color)
-   screen.blit(mesg, [100,300])
+      mesg = font_style.render(msg, True, color)
+      screen.blit(mesg, [100,300])
 def message1(msg,color):
    mesg = font_style.render(msg, True, color)
    screen.blit(mesg, [100,400])
 def draw_score(screen, score):
-   score_surface = font_style.render(f"Призы: {score}", True, (255, 255, 255))
-   screen.blit(score_surface, (10, 10))
+   score_surface = font_style.render(f"Очки: {score}", True, (255, 255, 255))
+   screen.blit(score_surface, (400, 10))
+   clock_surface = font_style.render(f"Время: {clocked}", True, (255, 255, 255))
+   screen.blit(clock_surface, (200, 10))
 while game_close != True:
     while game_over == 1:
            screen.fill(neutral)
            message("Вы проиграли! Нажмите Q для выхода", red)
-           message1("или C для повторной игры", red)
+           draw_score(screen, score)
            pygame.display.update()
+           for event in pygame.event.get():
+              if event.type == pygame.KEYDOWN:
+                   if event.key == pygame.K_q:
+                      pygame.quit
+                      exit()
+    clocked +=0.1
+    clocked = round(clocked,1)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -73,8 +84,12 @@ while game_close != True:
            food = random.randint(0,1)
            screen.fill((boom))
            pygame.draw.circle(screen, red, (x, y), r)
+           clocked = round(clocked, 1)
+           score += 1/clocked
+           score = round(score, 1)
+           clocked = 0
            pygame.display.update()
-           pygame.time.delay(65)
+           pygame.time.delay(25)
          
          
     if food ==1:
@@ -90,12 +105,17 @@ while game_close != True:
            food = random.randint(0,1)
            screen.fill((boom))
            pygame.draw.circle(screen, red, (x, y), r)
+           clocked = round(clocked, 1)
+           score += 1/clocked
+           score = round(score, 1)
+           clocked = 0
            pygame.display.update()
-           pygame.time.delay(65)
-         
+           pygame.time.delay(25)
+           
     screen.fill((neutral))
     pygame.draw.rect(screen, ne, [50,350, 90,100])
     pygame.draw.rect(screen, en, [660,350, 90,100])
     pygame.draw.circle(screen, red, (x,y), r)
+    draw_score(screen, score)
     pygame.display.update()
     pygame.time.delay(30)
