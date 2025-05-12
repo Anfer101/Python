@@ -20,8 +20,6 @@ x = 50
 y = 400
 x_speed = 5
 y_speed = 5
-x_speedo = -5
-y_speedo = -5
 Riru = -1
 # Шрифты
 font = pygame.font.SysFont('Arial', 50)
@@ -48,8 +46,10 @@ def start_game():
     pygame.quit()  # Закрываем меню
     subprocess.run(["python", "Курсовая.py"])  # Запускаем игру
     sys.exit()     # Закрываем всё после игры
-
-def main_menu(x, x_speed, y, y_speed, x_speedo, y_speedo):
+def exit2():
+    pygame.quit()
+    sys.exit()
+def main_menu(x, x_speed, y, y_speed):
     while True:
         screen.fill(BLACK)
         # Заголовок
@@ -58,7 +58,7 @@ def main_menu(x, x_speed, y, y_speed, x_speedo, y_speedo):
         
         # Кнопки
         draw_button("Старт", WIDTH//2 - 100, HEIGHT//2 - 30, start_game)
-        draw_button("Выход", WIDTH//2 - 100, HEIGHT//2 + 50, sys.exit)
+        draw_button("Выход", WIDTH//2 - 100, HEIGHT//2 + 50, sys.exit2)
             
         # Выход по крестику
         for event in pygame.event.get():
@@ -89,4 +89,4 @@ def main_menu(x, x_speed, y, y_speed, x_speedo, y_speedo):
         pygame.time.delay(25)
 
 if __name__ == "__main__":
-    main_menu(x,x_speed, y,y_speed,y_speedo, x_speedo)
+    main_menu(x,x_speed, y,y_speed)
